@@ -58,7 +58,7 @@ const router = express.Router();
 
 // Index
 
-router.get("/posts", (req, res) => {
+router.get("/", (req, res) => {
   res.json({
     message: "Lettura di tutti i post",
     posts,
@@ -67,13 +67,13 @@ router.get("/posts", (req, res) => {
 
 // Store / Create
 
-router.post("/posts", (req, res) => {
+router.post("/", (req, res) => {
   res.json("Creazione di un nuovo post");
 });
 
 // Show / Read
 
-router.get("/posts/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   const id = parseInt(req.params.id); 
   const post = posts.find(post => post.id === id); 
 
@@ -92,14 +92,14 @@ router.get("/posts/:id", (req, res) => {
 
 // Update
 
-router.put("/posts/:id", (req, res) => {
+router.put("/:id", (req, res) => {
   const id = req.params.id;
   res.json("Sostituzione del post " + id);
 });
 
 // Destroy / Delete
 
-router.delete("/posts/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
   const id = req.params.id;
   res.json("Eliminazione del post " + id);
 });

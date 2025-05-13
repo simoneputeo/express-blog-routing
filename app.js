@@ -4,7 +4,7 @@ const port = 3000
 const postRouter = require("./routers/posts.js")
 
 
-app.use("/", postRouter);
+app.use("/posts", postRouter);
 
 app.listen(port, () => {
   console.log(`Il server è in ascolto sulla porta ${port}`)
