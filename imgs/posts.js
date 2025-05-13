@@ -1,8 +1,3 @@
-const express = require('express')
-const app = express()
-const port = 3000
-
-
 const posts = [
   {
     id: 1,
@@ -16,7 +11,7 @@ const posts = [
     id: 2,
     title: "Cracker alla barbabietola",
     content: `I cracker alla barbabietola sono uno snack stuzzicante e originale da preparare in casa utilizzando ingredienti semplici e genuini. Queste sfogliette dal colore brillante non passeranno inosservate nel vostro cestino del pane e arricchiranno la tavola con il loro gusto unico e accattivante. I cracker fatti a mano sono anche un gustoso snack spezza fame, da portare in ufficio o a scuola. Venite a scoprire il nostro mix di semi e cereali per realizzare l'impasto e divertitevi a sperimentare nuove ricette di cracker variando i semi, le farine e le spezie per gusti sempre nuovi, ecco qualche idea:
-              Cracker di farron
+              Cracker di farro
               Cracker di lupini
               Cracker allo zafferano
               Cracker ai semi`,
@@ -49,40 +44,4 @@ const posts = [
   },
 ];
 
-const router = express.Router()
-
-
-// Index
-
-router.get("/posts", (req, res) => {
-  res.json("Lettura di tutti i post");
-});
-
-// Store / Create
-
-router.post("/posts", (req, res) => {
-  res.json("Creazione di un nuovo post");
-});
-
-// Show / Read
-
-router.get("/posts/:id", (req, res) => {
-  const id = req.params.id;
-  res.json("Lettura del dettaglio del post " + id);
-});
-
-// Update
-
-router.put("/posts/:id", (req, res) => {
-  const id = req.params.id;
-  res.json("Sostituzione del post " + id);
-});
-
-// Destroy / Delete
-
-router.delete("/posts/:id", (req, res) => {
-  const id = req.params.id;
-  res.json("Eliminazione del post " + id);
-});
-
-module.exports = router
+module.exports = { posts };
