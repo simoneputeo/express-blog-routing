@@ -1,7 +1,6 @@
-const express = require('express')
-const app = express()
-const port = 3000
-
+const express = require("express");
+const app = express();
+const port = 3000;
 
 const posts = [
   {
@@ -45,17 +44,25 @@ const posts = [
     title: "Torta paesana",
     content: `La torta paesana è un dolce di origine lombarda e precisamente della Brianza, la zona compresa tra la provincia a nord di Milano e il lago di Lecco-Como. E' un dolce di origine contadina, dalle infinite varianti, ma realizzata principalmente con pane raffermo bagnato nel latte. E' infatti conosciuta anche come torta di pane o, in dialetto locale, “michelacc” ovvero mica e lac (pane e latte). A seconda dei gusti e delle disponibilità del momento, al pane ammollato ogni famiglia univa ingredienti diversi, chi l'uvetta o chi i pinoli ad esempio. Noi vi presentiamo la nostra versione con l'aggiunta di cacao e amaretti: perfetta da gustare per una merenda dal sapore rustico, la torta paesana è un perfetto dolce di recupero quando si ha del pane avanzato… ed è ancora più buona il giorno dopo!`,
     image: "/imgs/posts/torta_paesana.jpeg",
-    tags: ["Dolci", "Dolci al cioccolato", "Torte", "Ricette vegetariane", "Ricette al forno"],
+    tags: [
+      "Dolci",
+      "Dolci al cioccolato",
+      "Torte",
+      "Ricette vegetariane",
+      "Ricette al forno",
+    ],
   },
 ];
 
-const router = express.Router()
-
+const router = express.Router();
 
 // Index
 
 router.get("/posts", (req, res) => {
-  res.json("Lettura di tutti i post");
+  res.json({
+    message: "Lettura di tutti i post",
+    posts,
+  });
 });
 
 // Store / Create
@@ -67,8 +74,20 @@ router.post("/posts", (req, res) => {
 // Show / Read
 
 router.get("/posts/:id", (req, res) => {
-  const id = req.params.id;
-  res.json("Lettura del dettaglio del post " + id);
+  const id = parseInt(req.params.id); 
+  const post = posts.find(post => post.id === id); 
+
+  if (!post) {
+    return res.status(404).json({ 
+      error: "Post non trovato",
+      message: `Nessun post con ID ${id} trovato`
+    });
+  }
+
+  res.json({
+    message: `Dettaglio del post ${id}`,
+    data: post
+  });
 });
 
 // Update
@@ -85,4 +104,4 @@ router.delete("/posts/:id", (req, res) => {
   res.json("Eliminazione del post " + id);
 });
 
-module.exports = router
+module.exports = router;
